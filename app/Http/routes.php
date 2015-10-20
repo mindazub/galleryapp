@@ -1,16 +1,18 @@
 <?php
 
-Route::get('/', 'GalleryController@viewGalleryList');
+// Route::get('/', 'GalleryController@index');
 
-// Route::get('/', [
-// 	'as' => 'home',
-// 	'uses' => 'PagesController@home'
-// 	]);
+Route::get('/', [
+	'as' => 'home',
+	'uses' => 'GalleryController@index'
+	]);
 
-Route::get('gallery/list', 'GalleryController@viewGalleryList');
+Route::get('users', 'UsersController@index');
+
+Route::get('gallery/index', 'GalleryController@index');
 Route::post('gallery/save', 'GalleryController@saveGallery');
 
-Route::get('gallery/view/{id}', 'GalleryController@viewGalleryPics');
+Route::get('gallery/view/{id}', 'GalleryController@show');
 Route::post('image/do-upload', 'GalleryController@doImageUpload');
 
 

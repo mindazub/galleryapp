@@ -14,7 +14,7 @@ class CreateImagesTabpe extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gallery_id');
+            $table->integer('gallery_id')->unsigned();
             $table->string('file_name');
             $table->string('file_size', 10);
             $table->string('file_mime', 50);
