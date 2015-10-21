@@ -9,6 +9,7 @@ use App\Http\Requests\CreateGalleryRequest;
 use App\Http\Controllers\Controller;
 use Validator;
 // use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
 {
@@ -75,7 +76,21 @@ class GalleryController extends Controller
         // $filename = uniqid() . $file->getClientOriginalName(); 
         $filename = time() . $file->getClientOriginalName(); 
         // move file to corect location
-        $file->move('galleryapp/images', $filename);
+        if(!file_exists('galleryapp/images'))
+        {
+            mkdir('galleryapp/images', 0777, true);
+        }
+
+        $file->move('galleryapp/images/', $filename);
+        
+        // Thumb creating and checking got the availability
+        if(!file_exists('galleryapp/images/thumbs'))
+        {
+            mkdir('galleryapp/images/thumbs', 0777, true);
+        }
+
+        $thumb = Image::make('galleryapp/images/'. $filename)->resize(240, 160)->save('galleryapp/images/thumbs/'.$filename, 50);
+
         // save the image to the database
         $gallery = Gallery::find($request->input('gallery_id'));
         $image = $gallery->images()->create([
@@ -83,8 +98,34 @@ class GalleryController extends Controller
             'file_name' => $filename,
             'file_mime'=> $file->getClientMimeType(),
             'file_size' => $file->getClientSize(),
-            'file_path' => 'galleryapp/images' . $filename,
+            'file_path' => 'galleryapp/images/' . $filename,
             'created_by' =>  Auth::user()->id
             ]);
+        return $image;
+    }
+
+    public function delete($id) {
+
+        $currentgallery = Gallery::findOrFail($id);
+
+        if( $currentgallery->created_by != Auth::user()->id )
+        {
+            abort('403',  'You are not allowed to delete this gallery!');
+        }
+
+        // $imagesCurrrent = $currentgallery->images();
+
+        foreach($currentgallery->images as $image)
+        {
+            unlink(public_path($image->file_path));
+            unlink(public_path('galleryapp/images/thumbs/' . $image->file_name));
+        }
+
+        $currentgallery->images()->delete();
+
+        $currentgallery->delete();
+
+        return redirect()->back();
+
     }
 }

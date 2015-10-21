@@ -12,6 +12,8 @@ Route::get('users', 'UsersController@index');
 Route::get('gallery/index', 'GalleryController@index');
 Route::post('gallery/save', 'GalleryController@saveGallery');
 
+Route::get('gallery/delete/{id}', 'GalleryController@delete');
+
 Route::get('gallery/view/{id}', 'GalleryController@show');
 Route::post('image/do-upload', 'GalleryController@doImageUpload');
 

@@ -14,6 +14,7 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     // mix.sass('app.scss');
     mix.styles([
+        "myapp.css",
     	"normalize.css",
     	"bootstrap.min.css",
     	"ripples.css",

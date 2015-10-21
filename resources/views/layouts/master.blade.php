@@ -10,6 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.css">	
 	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="{{ url(elixir('css/all.css')) }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/lightbox.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/mygalleryimages.css') }}">
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<!-- ROBOTO	 -->
@@ -32,6 +34,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<!-- VENDOR why-->
+	<script src="{{ asset('js/vendor/lightbox.min.js') }}" type="text/javascript"></script>
 	<script type="text/javascript" src="{{ url(elixir('js/all.js')) }}">
 	</script>
 </body>

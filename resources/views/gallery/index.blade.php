@@ -26,9 +26,17 @@
 			<tbody>
 			@foreach($galleries->all() as $gallery)
 				<tr>
-					<td>{{ $gallery->name }}</td>
-					<td><a href="/gallery/view/{{ $gallery->id }}">View</a></td>
-					<td>Delete</td>
+					<td>{{ $gallery->name }}
+						<span class="pull-right">
+							{{ $gallery->images()->count() }}
+						</span>
+					</td>
+					<td class="text-center"><a href="/gallery/view/{{ $gallery->id }}">
+						<i class="mdi-action-visibility"></i>
+					</a></td>
+					<td class="text-center"><a href="/gallery/delete/{{ $gallery->id }}">
+						<i class="mdi-navigation-close"</i>
+					</a></td>
 				</tr>
 			@endforeach
 			</tbody>
